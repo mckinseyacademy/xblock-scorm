@@ -25,7 +25,7 @@ from microsite_configuration import microsite
 
 from mako.template import Template as MakoTemplate
 
-from .scorm_file_uploader import ScormPackageUploader, STATES
+from .scorm_file_uploader import ScormPackageUploader, STATE as UPLOAD_STATE
 
 # Make '_' a no-op so we can scrape strings
 _ = lambda text: text
@@ -289,11 +289,11 @@ class ScormXBlock(XBlock):
             ScormPackageUploader.clear_percentage_cache(self.location.block_id)
             return Response(json.dumps({'status': 'error', 'message': e.message}))
 
-        if state == STATES.progress:
+        if state == UPLOAD_STATE.PROGRESS:
             response = {"files": [{
                 "size": data
             }]}
-        elif state == STATES.complete and data:
+        elif state == UPLOAD_STATE.COMPLETE and data:
             ScormPackageUploader.clear_percentage_cache(self.location.block_id)
             self.scorm_file = data
             response = {'status': 'OK'}

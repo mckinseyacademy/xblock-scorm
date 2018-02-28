@@ -22,7 +22,7 @@ function ScormStudioXBlock(runtime, element) {
 
       if(percentVal == '100%'){
         clearInterval(pollingParams.id);
-        $(element).find('.status-container .success-msg').text('Scorm package has been succesfully uploaded.');
+        $(element).find('.status-container .success-msg').text('Scorm package has been succesfully uploaded!');
       }else{
         pollingParams.id = setTimeout(pollUploadStatus, pollingParams.interval);
       }
