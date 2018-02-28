@@ -18,10 +18,14 @@ logger = logging.getLogger(__name__)
 # e.g; "bytes 0-19999999/69221159"
 CONTENT_RE = re.compile(r"(?P<start>\d{1,11})-(?P<end>\d{1,11})/(?P<size>\d{1,11})")
 
+# upload progress cache key expiry
+PROGRESS_CACHE_EXPIRY = 1 * 60 * 60  # 1 Hour
+
 
 class FileAccessMode(object):
     WRITE = "wb+"
     APPEND = "ab+"
+    READ_WRITE = "rb+"
 
 
 class STATE(object):
@@ -29,7 +33,6 @@ class STATE(object):
     enum for upload state
     """
     PROGRESS = 'progress'
-    ERROR = 'error'
     COMPLETE = 'complete'
 
 
@@ -46,25 +49,10 @@ class ScormPackageUploader(object):
 
     def upload(self):
         content_range = self._get_content_range()
-
-        if int(content_range['start']) == 0:
-            mode = FileAccessMode.WRITE
-        else:
-            mode = FileAccessMode.APPEND
-            size = os.path.getsize(self.temp_file_path)
-            if size > int(content_range['end']) and size == int(content_range['size']):
-                return STATE.COMPLETE, None
+        mode = FileAccessMode.WRITE if int(content_range['start']) == 0 else FileAccessMode.APPEND
 
         self._write_to_file(mode=mode)
-        size = os.path.getsize(self.temp_file_path)
-
-        if int(content_range['end']) != int(content_range['size']) - 1:
-            # More chunks coming
-            return STATE.PROGRESS, size
-
-        scorm_file_url = self._extract_and_store()
-
-        return STATE.COMPLETE, scorm_file_url
+        return self._upload_state(content_range)
 
     def _get_content_range(self):
         try:
@@ -76,14 +64,25 @@ class ScormPackageUploader(object):
 
         return content_range
 
+    def _upload_state(self, content_range):
+        size = os.path.getsize(self.temp_file_path)
+
+        if int(content_range['end']) != int(content_range['size']) - 1:
+            # More chunks coming
+            return STATE.PROGRESS, size
+        else:
+            # upload complete, extract and store
+            scorm_file_url = self._extract_and_store()
+            return STATE.COMPLETE, scorm_file_url
+
     def _write_to_file(self, mode):
         with open(self.temp_file_path, mode) as temp_file:
             for chunk in self.scorm_file.chunks():
                 temp_file.write(chunk)
 
     def _extract_and_store(self):
-        cache_key = ScormPackageUploader.get_progress_cache_key(self.xblock.location.block_id)
-        cache.set(cache_key, 0, 1 * 60 * 60)
+        cache_key = ScormPackageUploader._get_progress_cache_key(self.xblock.location.block_id)
+        cache.set(cache_key, 0, PROGRESS_CACHE_EXPIRY)
 
         unizpped_dir = self._extract_zipped_file()
         storage_url = self._save_to_storage(unizpped_dir)
@@ -109,9 +108,11 @@ class ScormPackageUploader(object):
             file_temp_path = file_to_store['path']
             file_relative_path = file_temp_path.decode(self.xblock.encoding).encode('utf-8').replace(tempdir, '')
 
-            with open(file_temp_path, 'rb+') as fh:
+            with open(file_temp_path, FileAccessMode.READ_WRITE) as fh:
                 try:
-                    logger.info('Storing file `{}` of size `{}` on S3'.format(file_relative_path, file_to_store['size']))
+                    logger.info(
+                        'Storing file `{}` of size `{}` on S3'.format(file_relative_path, file_to_store['size'])
+                    )
                     storage.save('{}{}'.format(self.scorm_storage_location, file_relative_path), fh)
                     logger.info('File `{}` stored.'.format(file_relative_path))
                     uploaded_size += file_to_store['size']
@@ -163,8 +164,8 @@ class ScormPackageUploader(object):
         percent = int(uploaded / float(total) * 100)
         block_id = self.xblock.location.block_id
 
-        cache_key = ScormPackageUploader.get_progress_cache_key(block_id)
-        cache.set(cache_key, percent, 1 * 60 * 60)
+        cache_key = ScormPackageUploader._get_progress_cache_key(block_id)
+        cache.set(cache_key, percent, PROGRESS_CACHE_EXPIRY)
 
     def _post_upload_cleanup(self, tempdir):
         try:
@@ -174,15 +175,15 @@ class ScormPackageUploader(object):
             pass
 
     @staticmethod
-    def get_progress_cache_key(block_id):
+    def _get_progress_cache_key(block_id):
         return 'upload_percent_{}'.format(block_id)
 
     @staticmethod
     def get_upload_percentage(block_id):
-        cache_key = ScormPackageUploader.get_progress_cache_key(block_id)
+        cache_key = ScormPackageUploader._get_progress_cache_key(block_id)
         return cache.get(cache_key, 100)
 
     @staticmethod
     def clear_percentage_cache(block_id):
-        cache_key = ScormPackageUploader.get_progress_cache_key(block_id)
+        cache_key = ScormPackageUploader._get_progress_cache_key(block_id)
         cache.delete(cache_key)
