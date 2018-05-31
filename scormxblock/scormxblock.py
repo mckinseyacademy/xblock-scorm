@@ -183,7 +183,8 @@ class ScormXBlock(XBlock):
         course_directory = self.scorm_file
         if self.scorm_player == 'SCORM_PKG_INTERNAL':
             # TODO: support initial filename other than index.html for internal players
-            scorm_player_url = '{}://{}{}'.format(scheme, lms_base, self.scorm_file)
+            #scorm_player_url = '{}://{}{}'.format(scheme, lms_base, self.scorm_file)
+            scorm_player_url = '{}{}'.format(self.scorm_file, 'index.html')
         elif self.scorm_player:
             player_config = DEFINED_PLAYERS[self.scorm_player]
             player = player_config['location']
