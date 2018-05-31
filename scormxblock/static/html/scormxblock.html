@@ -1,5 +1,6 @@
 <%!
 import cgi
+from django.utils.translation import gettext as _
 %>
 <%  
 	player_config_attrs = ''
@@ -13,7 +14,7 @@ for item in list({player_config}.items()):
 <div class="scormxblock_block">
     <h3 class="scorm_name">{self.display_name} <span class="scorm_weight"></span></h3>
     <div class="scorm_description">{self.description}
-        <div class="scorm_launch"><button id="scorm-launch-{self.url_name}">Launch module</button></div>
+        <div class="scorm_launch"><button id="scorm-launch-{self.url_name}">${{_("Launch module")}}</button></div>
     </div>
 
 </div>
