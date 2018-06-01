@@ -45,10 +45,6 @@ msgstr "Subir archivo SCORM (.zip)"
 msgid "Upload a new SCORM package."
 msgstr "Cargar un nuevo paquete SCORM"
 
-#: scormxblock.py:72
-msgid "SCORM player"
-msgstr "Reproductor de SCORM"
-
 #: scormxblock.py:73
 msgid ""
 "SCORM player configured in Django settings, or index.html file contained in "
@@ -62,12 +58,12 @@ msgid ""
 "SCORM block's problem weight in the course, in points.  If not graded, set "
 "to 0"
 msgstr ""
-"Peso del problema del bloque SCORM en el curso, en puntos. Si no es calificable, establecer"
+"Peso del problema del bloque SCORM en el curso, en puntos. Si no es calificable, establecer "
 "en 0"
 
 #: scormxblock.py:99
 msgid "Display Type"
-msgstr ""
+msgstr "Tipo de visualización"
 
 #: scormxblock.py:102
 msgid ""
@@ -78,7 +74,7 @@ msgstr ""
 "la configuración específica del reproductor."
 
 #: scormxblock.py:106
-msgid "Display Width (px)"
+msgid "Display Width"
 msgstr "Ancho de la pantalla (px)"
 
 #: scormxblock.py:107
@@ -86,7 +82,7 @@ msgid "Width of iframe or popup window"
 msgstr "Ancho del iframe o de la ventana emergente"
 
 #: scormxblock.py:112
-msgid "Display Height (px)"
+msgid "Display Height"
 msgstr "Alto de la pantalla (px)"
 
 #: scormxblock.py:113
@@ -121,9 +117,25 @@ msgstr ""
 "'El reproductor interno' siempre revisará este campo para que un atributo 'initial_html' "
 "anule index.html como la página inicial."
 
+#: static/html/studio.html:23
+msgid "Upload SCORM File"
+msgstr "Subir archivo SCORM"
+
 #: static/html/studio.html:25
 msgid "Choose a File to Import"
 msgstr "Elegir un archivo para importar"
+
+#: static/html/studio.html:30
+msgid "Currently stored at:"
+msgstr "Actualmente almacenado en:"
+
+#: static/html/studio.html:48
+msgid "SCORM Player"
+msgstr "Reproductor de SCORM"
+
+#: static/html/studio.html:91
+msgid "Text Encoding"
+msgstr "Codificación de texto"
 
 #: static/html/scormxblock.html:17
 msgid "Launch module"
