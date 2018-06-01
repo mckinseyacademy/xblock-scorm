@@ -1,30 +1,32 @@
+<%page expression_filter="h"/>
+<%! from django.utils.translation import ugettext as _ %>
 <div class="wrapper-comp-settings is-active editor-with-buttons" id="settings-tab">
   <ul class="list-input settings-list">
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="display_name">Display Name</label>
+        <label class="label setting-label" for="display_name">${_("Display Name")}</label>
         <input class="input setting-input" name="display_name" id="display_name" value="${block.display_name}" type="text" />
-        <div class="setting-help" style="display:block">${block.fields['display_name'].help}</div>        
+        <div class="setting-help" style="display:block">${_(block.fields['display_name'].help)}</div>        
       </div>
     </li>
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="descrption">Description</label>
+        <label class="label setting-label" for="descrption">${_("Description")}</label>
         
         <textarea class="input setting-input" name="description" id="description" cols="50" rows="6">${block.description}</textarea>
-        <div class="setting-help" style="display:block">${block.fields['description'].help}</div>
+        <div class="setting-help" style="display:block">${_(block.fields['description'].help)}</div>
       </div>
     </li>
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="scorm_file">Upload SCORM File</label>
+        <label class="label setting-label" for="scorm_file">${_("Upload SCORM File")}</label>
         <a href="#" class="action action-choose-file choose-file-button" id="scorm-file-select">
           <span class="icon fa fa-upload" aria-hidden="true"></span>
-          <span class="copy">Choose a File to Import</span>
+          <span class="copy">${_("Choose a File to Import")}</span>
         </a>
         <span class="file-chosen"></span>
         <input class="input setting-input" name="scorm_file" id="scorm_file" type="file" />
-        <div class="setting-help" style="display:block">${block.fields['scorm_file'].help}<br/>Currently stored at: ${block.scorm_file}.</div>
+        <div class="setting-help" style="display:block">${_(block.fields['scorm_file'].help)}<br/>${_("Currently stored at:")} ${block.scorm_file}.</div>
 
         <div class="status-container">
           <span class="status-element current-step"></span>
@@ -42,63 +44,63 @@
     </li>
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="scorm_file">SCORM Player</label>
+        <label class="label setting-label" for="scorm_file">${_("SCORM Player")}</label>
         <select class="setting-input" name="scorm_player" id="scorm_player">
           %for opt in block.fields['scorm_player'].values:
               <option value="${opt['value']}" ${block.scorm_player == opt['value'] and 'selected'}>${opt['display_name']}</option>
           %endfor
         </select>
-        <div class="setting-help" style="display:block">${block.fields['scorm_player'].help}</div>        
+        <div class="setting-help" style="display:block">${_(block.fields['scorm_player'].help)}</div>        
       </div>
     </li>
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="weight">Weight</label>
+        <label class="label setting-label" for="weight">${_("Weight")}</label>
         <input class="input setting-input" name="weight" id="weight" value="${block.weight}" type="number" />
       </div>
-      <div class="setting-help" style="display:block">${block.fields['weight'].help}</div>        
+      <div class="setting-help" style="display:block">${_(block.fields['weight'].help)}</div>        
     </li>
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
         <fieldset>
-          <legend class="label setting-label">Display Type</legend>
+          <legend class="label setting-label">${_("Display Type")}</legend>
           %for opt in block.fields['display_type'].values:
             <label class="label" for="display_type_${opt}">${opt}</label> <input class="input setting-input" name="display_type" id="display_type_${opt}" ${block.display_type==opt and 'checked '} type="radio" value="${opt}" style="width:auto;height:auto" />
           %endfor
         </fieldset>
-        <div class="setting-help" style="display:block">${block.fields['display_type'].help}</div>        
+        <div class="setting-help" style="display:block">${_(block.fields['display_type'].help)}</div>        
       </div>
     </li>
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="display_width">Display Width</label>
+        <label class="label setting-label" for="display_width">${_("Display Width")}</label>
         <input class="input setting-input" name="display_width" id="display_width" value="${block.display_width}" type="number" />
-        <div class="setting-help" style="display:block">${block.fields['display_width'].help}</div>        
+        <div class="setting-help" style="display:block">${_(block.fields['display_width'].help)}</div>        
       </div>
     </li>
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="display_height">Display Height</label>
+        <label class="label setting-label" for="display_height">${_("Display Height")}</label>
         <input class="input setting-input" name="display_height" id="display_height" value="${block.display_height}" type="number" />
-        <div class="setting-help" style="display:block">${block.fields['display_height'].help}</div>        
+        <div class="setting-help" style="display:block">${_(block.fields['display_height'].help)}</div>        
       </div>
     </li>
     <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="encoding">Text Encoding</label>
+        <label class="label setting-label" for="encoding">${_("Text Encoding")}</label>
         <select class="input setting-input" name="encoding" id="encoding">
           %for opt in block.fields['encoding'].values:
             <option value="${opt['value']}" ${block.encoding == opt['value'] and 'selected'}>${opt['display_name']}</option>
           %endfor
         </select>  
-        <div class="setting-help" style="display:block">${block.fields['encoding'].help}</div>        
+        <div class="setting-help" style="display:block">${_(block.fields['encoding'].help)}</div>        
       </div>
     </li>
         <li class="field comp-setting-entry is-set">
       <div class="wrapper-comp-setting">
-        <label class="label setting-label" for="player_configuration">Player Configuration</label>
+        <label class="label setting-label" for="player_configuration">${_("Player Configuration")}</label>
         <textarea class="input setting-input" name="player_configuration" id="player_configuration" cols="50" rows="10">${block.player_configuration}</textarea>
-        <div class="setting-help" style="display:block">${block.fields['player_configuration'].help}</div>        
+        <div class="setting-help" style="display:block">${_(block.fields['player_configuration'].help)}</div>        
       </div>
     </li>
 
@@ -106,10 +108,10 @@
   <div class="xblock-actions">
     <ul>
       <li class="action-item">
-        <a href="#" class="button action-primary save-button">Save</a>
+        <a href="#" class="button action-primary save-button">${_("Save")}</a>
       </li>
       <li class="action-item">
-        <a href="#" class="button cancel-button">Cancel</a>
+        <a href="#" class="button cancel-button">${_("Cancel")}</a>
       </li>
     </ul>
   </div>

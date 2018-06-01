@@ -36,5 +36,5 @@ setup(
             'scormxblock = scormxblock:ScormXBlock',
         ]
     },
-    package_data=package_data("scormxblock", ["static", "public"]),
+    package_data=package_data("scormxblock", ["static", "public", "locale"]),
 )
