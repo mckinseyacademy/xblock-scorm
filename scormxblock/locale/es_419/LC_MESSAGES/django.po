@@ -34,7 +34,7 @@ msgid ""
 "Brief description of the SCORM modules will be displayed above the player. "
 "Can contain HTML."
 msgstr ""
-"Una breve descripción de los módulos SCORM se mostrará arriba del reproductor."
+"Una breve descripción de los módulos SCORM se mostrará arriba del reproductor. "
 "Puede contener HTML"
 
 #: scormxblock.py:66
