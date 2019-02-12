@@ -26,7 +26,7 @@ from microsite_configuration import microsite
 from mako.template import Template as MakoTemplate
 
 from .scorm_file_uploader import ScormPackageUploader, STATE as UPLOAD_STATE
-from . import constants
+from .constants import SCORM_COMPLETION_STATUS
 
 # Make '_' a no-op so we can scrape strings
 _ = lambda text: text
@@ -418,7 +418,7 @@ class ScormXBlock(XBlock):
         store JSON SCORM API status from SSLA player (or potentially others)
         """
         # TODO: this is specific to SSLA player at this point.  evaluate for broader use case
-        data = request.POST['data']
+        data = request.POST['data'] if request.POST else request.body
         scorm_data = json.loads(data)
 
         new_status = scorm_data.get('status', 'not attempted')
@@ -569,7 +569,7 @@ class ScormXBlock(XBlock):
             # We do not want the elif to run if progress_measure exits but is invalid
             if self.is_progress_measure_valid(progress_measure, old_scorm_data):
                 self._publish_progress(progress_measure)
-        elif current_scorm_data.get('status', '') in constants.SCORM_COMPLETION_STATUS:
+        elif current_scorm_data.get('status', '') in SCORM_COMPLETION_STATUS:
             self._publish_progress(1.0)
 
     def mark_in_progress(self, scorm_response_body):
