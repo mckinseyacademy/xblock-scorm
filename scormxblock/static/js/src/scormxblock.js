@@ -127,20 +127,43 @@ function ScormXBlock_${block_id}(runtime, element) {
       }
       return false;
     }
+
     function disableNextModuleArrow() {
-      var next_link = document.getElementsByClassName("next")[0];
-      var name = "complete-scorm future";
-      arr = next_link.className.split(" ");
-      if (arr.indexOf(name) == -1) {
-        next_link.className += " " + name;
+      if (isNewUI()) {
+        disableNextModuleArrowForNewUI();
       }
+      else {
+        disableNextModuleArrowForOldUI();
+      }
+    }
+
+    function isNewUI() {
+      return $( "body.new-theme" ).length;
+    }
+
+    function disableNextModuleArrowForOldUI() {
+      var next_module_link = $( ".controls .next" );
+      next_module_link.addClass( "complete-scorm future" );
+      next_module_link.attr("href", "#");
+
       var completionPopup = document.createElement('div');
       completionPopup.className = "complete-scorm-content";
       completionPopup.innerHTML = '<i class="fa fa-lock"></i>Complete all content to unlock';
 
-      var navigation_popup = document.querySelector(".next .mcka-tooltip");
+      var navigation_popup = document.querySelector(".controls .next .mcka-tooltip");
       navigation_popup.insertBefore(completionPopup, navigation_popup.firstChild);
     }
+
+    function disableNextModuleArrowForNewUI() {
+      var next_module_link = $( ".controls .right" );
+      next_module_link.addClass( "disable" );
+      next_module_link.attr("href", "#");
+      var completionPopupContent = '<i class=material-icons locked>lock</i><b>Complete all content to unlock<br></b>';
+      var popupContent = $(".controls .right span").attr("data-content")
+
+      $(".controls .right span").attr("data-content", completionPopupContent + popupContent);
+    }
+
     function showScormContent(host_frame) {
       if (isAutoPopup()) {
         var launch_btn = $('.scorm_launch button');
