@@ -103,6 +103,9 @@ function ScormXBlock_${block_id}(runtime, element) {
       })
     }
 
+    if (host_frame_${block_id}.data('is_next_module_locked') == "True") {
+      disableNextModuleArrow();
+    }
     document.handleScormPopupClosed = function() {
       launch_btn = $('.scorm_launch button');
       launch_btn.removeAttr('disabled');
@@ -124,7 +127,20 @@ function ScormXBlock_${block_id}(runtime, element) {
       }
       return false;
     }
+    function disableNextModuleArrow() {
+      var next_link = document.getElementsByClassName("next")[0];
+      var name = "complete-scorm future";
+      arr = next_link.className.split(" ");
+      if (arr.indexOf(name) == -1) {
+        next_link.className += " " + name;
+      }
+      var completionPopup = document.createElement('div');
+      completionPopup.className = "complete-scorm-content";
+      completionPopup.innerHTML = '<i class="fa fa-lock"></i>Complete all content to unlock';
 
+      var navigation_popup = document.querySelector(".next .mcka-tooltip");
+      navigation_popup.insertBefore(completionPopup, navigation_popup.firstChild);
+    }
     function showScormContent(host_frame) {
       if (isAutoPopup()) {
         var launch_btn = $('.scorm_launch button');
