@@ -138,7 +138,7 @@ function ScormXBlock_${block_id}(runtime, element) {
     }
 
     function isNewUI() {
-      return $( "body.new-theme" ).length;
+      return $( "body").hasClass("new-theme");
     }
 
     function disableNextModuleArrowForOldUI() {
@@ -150,12 +150,16 @@ function ScormXBlock_${block_id}(runtime, element) {
       completionPopup.className = "complete-scorm-content";
       completionPopup.innerHTML = '<i class="fa fa-lock"></i>Complete all content to unlock';
 
-      var navigation_popup = document.querySelector(".controls .next .mcka-tooltip");
-      navigation_popup.insertBefore(completionPopup, navigation_popup.firstChild);
+      $(".controls .next .mcka-tooltip").prepend(completionPopup);
     }
 
     function disableNextModuleArrowForNewUI() {
       var next_module_link = $( ".controls .right" );
+
+      var next_link_value = next_module_link.attr("href");
+      // No need to do anything since next link is already disabled
+      if (next_link_value == "#") return;
+
       next_module_link.addClass( "disable" );
       next_module_link.attr("href", "#");
       var completionPopupContent = '<i class=material-icons locked>lock</i><b>Complete all content to unlock<br></b>';

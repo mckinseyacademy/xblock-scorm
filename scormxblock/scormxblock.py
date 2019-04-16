@@ -46,7 +46,6 @@ AVAIL_ENCODINGS = encodings.aliases.aliases
 @XBlock.needs('i18n')
 class ScormXBlock(XBlock):
     has_score = True
-    progress = 0
     has_author_view = True
     has_custom_completion = True
 
@@ -87,6 +86,10 @@ class ScormXBlock(XBlock):
         default='not attempted'
     )
     lesson_score = Float(
+        scope=Scope.user_state,
+        default=0
+    )
+    scorm_progress = Float(
         scope=Scope.user_state,
         default=0
     )
@@ -242,7 +245,7 @@ class ScormXBlock(XBlock):
         iframe_width = self.display_type=='popup' and DEFAULT_IFRAME_WIDTH or self.display_width;
         iframe_height = self.display_type=='popup' and DEFAULT_IFRAME_HEIGHT or self.display_height;
         show_popup_manually = True if self.display_type=='popup' and self.popup_launch_type=='manual' else False;
-        lock_next_module = self.is_next_module_locked and self.progress < 1
+        lock_next_module = self.is_next_module_locked and self.scorm_progress < constants.MAX_PROGRESS_VALUE
         try:
             player_config = json.loads(self.player_configuration)
         except ValueError:
@@ -437,7 +440,7 @@ class ScormXBlock(XBlock):
         response = Response(self.raw_scorm_status, content_type='application/json', charset='UTF-8')
         if self.auto_completion:
             # Mark 100% progress upon launching the scorm content if auto_completion is true
-            self._publish_progress(1.0)
+            self._publish_progress(constants.MAX_PROGRESS_VALUE)
 
         return response
 
@@ -599,13 +602,13 @@ class ScormXBlock(XBlock):
             if self.is_progress_measure_valid(progress_measure, old_scorm_data):
                 self._publish_progress(progress_measure)
         elif current_scorm_data.get('status', '') in constants.SCORM_COMPLETION_STATUS:
-            self._publish_progress(1.0)
+            self._publish_progress(constants.MAX_PROGRESS_VALUE)
 
     def _publish_progress(self, completion):
         """
         Update completion by calling the completion API
         """
-        self.progress = completion
+        self.scorm_progress = completion
         self.runtime.publish(self, 'completion', {'completion': completion})
 
     def calculate_progress_measure(self, scorm_data):
