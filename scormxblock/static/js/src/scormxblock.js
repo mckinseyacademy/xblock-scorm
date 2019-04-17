@@ -142,9 +142,10 @@ function ScormXBlock_${block_id}(runtime, element) {
     }
 
     function disableNextModuleArrowForOldUI() {
-      var next_module_link = $( ".controls .next" );
-      next_module_link.addClass( "complete-scorm future" );
-      next_module_link.attr("href", "#");
+      var nextModuleLink = $( ".controls .next" );
+      if (isNextLinkAlreadyDisabled(nextModuleLink)) return;
+      nextModuleLink.addClass( "complete-scorm future" );
+      nextModuleLink.attr("href", "#");
 
       var completionPopup = document.createElement('div');
       completionPopup.className = "complete-scorm-content";
@@ -154,18 +155,21 @@ function ScormXBlock_${block_id}(runtime, element) {
     }
 
     function disableNextModuleArrowForNewUI() {
-      var next_module_link = $( ".controls .right" );
+      var nextModuleLink = $( ".controls .right" );
+      if (isNextLinkAlreadyDisabled(nextModuleLink)) return;
 
-      var next_link_value = next_module_link.attr("href");
-      // No need to do anything since next link is already disabled
-      if (next_link_value == "#") return;
-
-      next_module_link.addClass( "disable" );
-      next_module_link.attr("href", "#");
+      nextModuleLink.addClass( "disable" );
+      nextModuleLink.attr("href", "#");
       var completionPopupContent = '<i class=material-icons locked>lock</i><b>Complete all content to unlock<br></b>';
-      var popupContent = $(".controls .right span").attr("data-content")
+      var popupContent = $(".controls .right span").attr("data-content");
 
       $(".controls .right span").attr("data-content", completionPopupContent + popupContent);
+    }
+
+    function isNextLinkAlreadyDisabled(nextModuleLink) {
+      var nextLinkValue = nextModuleLink.attr("href");
+      // No need to do anything since next link is already disabled
+      return nextLinkValue == "#";
     }
 
     function showScormContent(host_frame) {
