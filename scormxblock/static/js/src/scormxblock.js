@@ -30,7 +30,7 @@ function ScormXBlock_${block_id}(runtime, element) {
 
     this.LMSSetValue = function(cmi_element, value) {
       console.log("LMSSetValue " + cmi_element + " = " + value);
-      var handlerUrl = runtime.handlerUrl( element, 'scorm_set_value');
+      var handlerUrl = runtime.handlerUrl(element, 'scorm_set_value');
 
       if (cmi_element == 'cmi.core.lesson_status'||cmi_element == 'cmi.core.score.raw'){
 
@@ -138,13 +138,13 @@ function ScormXBlock_${block_id}(runtime, element) {
     }
 
     function isNewUI() {
-      return $( "body").hasClass("new-theme");
+      return $("body").hasClass("new-theme");
     }
 
     function disableNextModuleArrowForOldUI() {
-      var nextModuleLink = $( ".controls .next");
+      var nextModuleLink = $(".controls .next");
       if (isNextLinkAlreadyDisabled(nextModuleLink)) return;
-      nextModuleLink.addClass( "complete-scorm future");
+      nextModuleLink.addClass("complete-scorm future");
       nextModuleLink.attr("href", "javascript:void()");
 
       var completionPopup = document.createElement('div');
@@ -155,10 +155,10 @@ function ScormXBlock_${block_id}(runtime, element) {
     }
 
     function disableNextModuleArrowForNewUI() {
-      var nextModuleLink = $( ".controls .right");
+      var nextModuleLink = $(".controls .right");
       if (isNextLinkAlreadyDisabled(nextModuleLink)) return;
 
-      nextModuleLink.addClass( "disable");
+      nextModuleLink.addClass("disable");
       nextModuleLink.attr("href", "javascript:void()");
       var completionPopupContent = '<i class=material-icons locked>lock</i><b>Complete all content to unlock<br></b>';
       var popupContent = $(".controls .right span").attr("data-content");
