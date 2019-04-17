@@ -145,7 +145,7 @@ function ScormXBlock_${block_id}(runtime, element) {
       var nextModuleLink = $( ".controls .next");
       if (isNextLinkAlreadyDisabled(nextModuleLink)) return;
       nextModuleLink.addClass( "complete-scorm future");
-      nextModuleLink.attr("href", "#");
+      nextModuleLink.attr("href", "javascript:void()");
 
       var completionPopup = document.createElement('div');
       completionPopup.className = "complete-scorm-content";
@@ -159,7 +159,7 @@ function ScormXBlock_${block_id}(runtime, element) {
       if (isNextLinkAlreadyDisabled(nextModuleLink)) return;
 
       nextModuleLink.addClass( "disable");
-      nextModuleLink.attr("href", "#");
+      nextModuleLink.attr("href", "javascript:void()");
       var completionPopupContent = '<i class=material-icons locked>lock</i><b>Complete all content to unlock<br></b>';
       var popupContent = $(".controls .right span").attr("data-content");
 
@@ -169,7 +169,7 @@ function ScormXBlock_${block_id}(runtime, element) {
     function isNextLinkAlreadyDisabled(nextModuleLink) {
       var nextLinkValue = nextModuleLink.attr("href");
       // No need to do anything since next link is already disabled
-      return nextLinkValue == "#";
+      return nextLinkValue == "#" || nextLinkValue == "javascript:void()";
     }
 
     function showScormContent(host_frame) {
