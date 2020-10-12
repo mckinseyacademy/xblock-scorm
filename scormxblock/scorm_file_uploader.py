@@ -106,7 +106,7 @@ class ScormPackageUploader:
         for file_to_store in files_to_store:
             # defensive decode/encode from zip
             file_temp_path = file_to_store['path']
-            file_relative_path = file_temp_path.decode(self.xblock.encoding).encode('utf-8').replace(tempdir, '')
+            file_relative_path = file_temp_path.replace(tempdir, '')
 
             with open(file_temp_path, FileAccessMode.READ_WRITE) as fh:
                 try:

@@ -20,7 +20,6 @@ from xblock.core import XBlock
 from xblock.fields import Boolean, DateTime, Float, Integer, Scope, String
 from xblock.fragment import Fragment
 
-from microsite_configuration import microsite
 from openedx.core.lib.xblock_utils import add_staff_markup
 from util.date_utils import get_default_time_display
 
@@ -225,9 +224,6 @@ class ScormXBlock(XBlock):
         if isinstance(context, QueryDict):
             context = context.dict()
 
-        if microsite.is_request_in_microsite():
-            subdomain = microsite.get_value("domain_prefix", None) or microsite.get_value('microsite_config_key')
-            lms_base = "{}.{}".format(subdomain, lms_base)
         scorm_player_url = ""
 
         course_directory = self.scorm_file
@@ -331,7 +327,7 @@ class ScormXBlock(XBlock):
 
         logger.info('Upload percentage is: {}'.format(upload_percent))
 
-        return Response(json.dumps({"progress": upload_percent}))
+        return Response(json_body=json.dumps({"progress": upload_percent}))
 
     @XBlock.handler
     def file_upload_handler(self, request, suffix=''):
@@ -349,7 +345,7 @@ class ScormXBlock(XBlock):
         except Exception as e:
             logger.error('Scorm package upload error: {}'.format(e.message))
             ScormPackageUploader.clear_percentage_cache(self.location.block_id)
-            return Response(json.dumps({'status': 'error', 'message': e.message}))
+            return Response(json_body=json.dumps({'status': 'error', 'message': e.message}))
 
         if state == UPLOAD_STATE.PROGRESS:
             response = {"files": [{
@@ -360,7 +356,7 @@ class ScormXBlock(XBlock):
             self.scorm_file = data
             response = {'status': 'OK'}
 
-        return Response(json.dumps(response))
+        return Response(json_body=json.dumps(response))
 
     @XBlock.handler
     def studio_submit(self, request, suffix=''):
@@ -385,11 +381,11 @@ class ScormXBlock(XBlock):
                 json.loads(request.params['player_configuration'])  # just validation
                 self.player_configuration = request.params['player_configuration']
             except ValueError as e:
-                return Response(json.dumps({'result': 'failure',
+                return Response(json_body=json.dumps({'result': 'failure',
                                             'error': 'Invalid JSON in Player Configuration'.format(e)}),
                                 content_type='application/json')
 
-        return Response(json.dumps({'result': 'success'}), content_type='application/json')
+        return Response(json_body=json.dumps({'result': 'success'}), content_type='application/json')
 
     # if player sends SCORM API JSON directly
     @XBlock.json_handler
@@ -456,7 +452,7 @@ class ScormXBlock(XBlock):
         """
         # TODO: handle errors
         # TODO: this is specific to SSLA player at this point.  evaluate for broader use case
-        response = Response(self.raw_scorm_status, content_type='application/json', charset='UTF-8')
+        response = Response(json_body=self.raw_scorm_status, content_type='application/json', charset='UTF-8')
         if self.auto_completion:
             # Mark 100% progress upon launching the scorm content if auto_completion is true
             self._publish_progress(constants.MAX_PROGRESS_VALUE)
@@ -487,13 +483,13 @@ class ScormXBlock(XBlock):
         self.save()
 
         # TODO: handle errors
-        return Response(json.dumps(self.raw_scorm_status), content_type='application/json', charset='UTF-8')
+        return Response(json_body=json.dumps(self.raw_scorm_status), content_type='application/json', charset='UTF-8')
 
     @XBlock.handler
     def get_scorm_completion(self, request, suffix=''):
         completion = {'completion': self.scorm_progress or 0}
         return Response(
-            json.dumps(completion),
+            json_body=json.dumps(completion),
             content_type='application/json'
         )
 
