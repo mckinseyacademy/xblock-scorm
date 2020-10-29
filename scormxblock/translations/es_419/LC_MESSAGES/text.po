@@ -1,0 +1,158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-01 05:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: scormxblock.py:53
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#: scormxblock.py:54
+msgid "Display name for this module"
+msgstr "Nombre para mostrar de este módulo"
+
+#: scormxblock.py:59
+msgid "Description"
+msgstr "Descripción"
+
+#: scormxblock.py:60
+msgid ""
+"Brief description of the SCORM modules will be displayed above the player. "
+"Can contain HTML."
+msgstr "Arriba del reproductor, se mostrará una descripción breve de los módulos SCORM. Se puede incluir un archivo HTML."
+
+#: scormxblock.py:65
+msgid "Upload scorm file (.zip)"
+msgstr "Cargar archivo scorm (.zip)"
+
+#: scormxblock.py:66
+msgid "Upload a new SCORM package."
+msgstr "Cargue un paquete SCORM nuevo."
+
+#: scormxblock.py:71
+msgid "SCORM player"
+msgstr "Reproductor SCORM"
+
+#: scormxblock.py:72
+msgid ""
+"SCORM player configured in Django settings, or index.html file contained in "
+"SCORM package"
+msgstr "El reproductor SCORM se configuró en los ajustes Django, o bien en el archivo index.html que se incluye en el paquete SCORM"
+
+#: scormxblock.py:98
+msgid ""
+"SCORM block's problem weight in the course, in points.  If not graded, set "
+"to 0"
+msgstr "Se refiere a la ponderación de problemas en el bloque de SCORM en el curso, expresado en puntos. Si no está calificado, se establece en 0."
+
+#: scormxblock.py:102
+msgid "Enable completion upon viewing SCORM file"
+msgstr "Permitir que se marque como finalizado tras visualizar el archivo SCORM"
+
+#: scormxblock.py:107
+msgid "Locking"
+msgstr "Bloqueando"
+
+#: scormxblock.py:108
+msgid ""
+"Enable requirement to complete SCORM content before moving to next module"
+msgstr "Permitir que se requiera completar el contenido SCORM antes de avanzar al próximo módulo"
+
+#: scormxblock.py:113
+msgid "Display Type"
+msgstr "Tipo para mostrar"
+
+#: scormxblock.py:116
+msgid ""
+"Open in a new popup window, or an iframe.  This setting may be overridden by "
+"player-specific configuration."
+msgstr "Se abre en una ventana emergente nueva o en un IFrame nuevo. Es posible que estos ajustes se anulen debido a la configuración específica del reproductor."
+
+#: scormxblock.py:120
+msgid "Popup Launch Type"
+msgstr "Tipo de inicio emergente"
+
+#: scormxblock.py:123
+msgid "Open in a new popup through button or automatically."
+msgstr "Se abre en un elemento emergente nuevo desde abajo, o bien de forma automática."
+
+#: scormxblock.py:127
+msgid "Launch Button Text"
+msgstr "Texto del botón Inicio"
+
+#: scormxblock.py:128
+msgid "Display text for Launch Button"
+msgstr "Mostrar texto para el botón Inicio"
+
+#: scormxblock.py:133
+msgid "Display Width (px)"
+msgstr "Mostrar ancho (px)"
+
+#: scormxblock.py:134
+msgid "Width of iframe or popup window"
+msgstr "Ancho de IFrame o de la ventana emergente"
+
+#: scormxblock.py:139
+msgid "Display Height (px)"
+msgstr "Mostrar alto (px)"
+
+#: scormxblock.py:140
+msgid "Height of iframe or popup window"
+msgstr "Alto de IFrame o de la ventana emergente"
+
+#: scormxblock.py:145
+msgid "SCORM Package text encoding"
+msgstr "Codificación de texto del paquete SCORM"
+
+#: scormxblock.py:147
+msgid ""
+"Character set used in SCORM package.  Defaults to cp850 (or IBM850), for "
+"Latin-1: Western European languages)"
+msgstr "Se estableció el uso de caracteres en el paquete SCORM. Los valores predeterminados a cp850 (o IBM850) para Latin-1: idiomas de Europa Occidental)"
+
+#: scormxblock.py:152
+msgid "Player Configuration"
+msgstr "Configuración del reproductor"
+
+#: scormxblock.py:154
+msgid ""
+"JSON object string with overrides to be passed to selected SCORM player.  "
+"These will be exposed as data attributes on the host iframe and sent in a "
+"window.postMessage to the iframe's content window. Attributes can be any.  "
+"'Internal player' will always check this field for an 'initial_html' "
+"attribute to override index.html as the initial page."
+msgstr "Cadena de objetos JSON con anulaciones que se transfieren al reproductor SCORM seleccionado. Estos se muestran como atributos de datos en el hospedador IFrame y se envían en una ventana. Publicar mensaje para el contenido de ventana de IFrame. Se puede incluir cualquier atributo. El 'reproductor predeterminado' siempre comprueba este campo en busca de un atributo que anule el archivo index.html como página de inicio."
+
+#: scormxblock.py:158
+msgid "Scorm File Name"
+msgstr "Nombre del archivo Scorm"
+
+#: scormxblock.py:159
+msgid "Scorm Package Uploaded File Name"
+msgstr "Se cargó el nombre de archivo del paquete Scrom"
+
+#: scormxblock.py:541
+msgid "Question"
+msgstr "Pregunta"
+
+#: scormxblock.py:542
+msgid "Answer"
+msgstr "Respuesta"
+
+#: scormxblock.py:543
+msgid "Submissions count"
+msgstr "Recuento de entregas"
