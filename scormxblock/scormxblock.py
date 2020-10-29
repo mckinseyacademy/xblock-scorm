@@ -11,6 +11,7 @@ import pkg_resources
 import pytz
 import six
 from django.conf import settings
+from django import utils
 from django.core.files.storage import default_storage
 from django.http import QueryDict
 from mako.template import Template as MakoTemplate
@@ -303,6 +304,17 @@ class ScormXBlock(XBlock):
         frag.initialize_js('ScormXBlock_{0}'.format(context['block_id']))
         return frag
 
+    def get_translation_content(self):
+        """
+        Returns JS content containing translations for user's language.
+        """
+        try:
+            return self.resource_string('public/js/translations/{lang}/textjs.js'.format(
+                lang=utils.translation.to_locale(utils.translation.get_language()),
+            ))
+        except IOError:
+            return self.resource_string('public/js/translations/en/textjs.js')
+
     def author_view(self, context=None):
         return self.student_view(context, authoring=True)
 
@@ -315,6 +327,7 @@ class ScormXBlock(XBlock):
         frag.add_css(self.resource_string("static/css/scormxblock.css"))
         frag.add_javascript(self.resource_string("static/js/src/studio.js"))
         frag.add_javascript_url(self.runtime.local_resource_url(self, 'public/jquery.fileupload.js'))
+        frag.add_javascript(self.get_translation_content())
         frag.initialize_js('ScormStudioXBlock')
         return frag
 

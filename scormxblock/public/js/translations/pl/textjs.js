@@ -1,4 +1,8 @@
 
+            (function(global){
+                var ScormXBlockI18N = {
+                  init: function() {
+                    
 
 (function(globals) {
 
@@ -129,3 +133,10 @@
 
 }(this));
 
+
+                  }
+                };
+                ScormXBlockI18N.init();
+                global.ScormXBlockI18N = ScormXBlockI18N;
+            }(this));
+        

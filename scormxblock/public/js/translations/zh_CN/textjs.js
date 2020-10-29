@@ -1,4 +1,8 @@
 
+            (function(global){
+                var ScormXBlockI18N = {
+                  init: function() {
+                    
 
 (function(globals) {
 
@@ -13,9 +17,9 @@
   django.catalog = django.catalog || {};
   
   var newcatalog = {
-    "Check for Completion": "Auf Vollst\u00e4ndigkeit pr\u00fcfen", 
-    "Complete all content to continue.": "Zum Fortfahren Inhalt vervollst\u00e4ndigen.", 
-    "Content is complete, please continue.": "Inhalt ist vollst\u00e4ndig, bitte fahren Sie fort."
+    "Check for Completion": "\u68c0\u67e5\u662f\u5426\u586b\u5199\u5b8c\u6574", 
+    "Complete all content to continue.": "\u5b8c\u6574\u586b\u5199\u5185\u5bb9\u624d\u80fd\u7ee7\u7eed\u3002", 
+    "Content is complete, please continue.": "\u5185\u5bb9\u586b\u5199\u5b8c\u6574\uff0c\u8bf7\u7ee7\u7eed\u3002"
   };
   for (var key in newcatalog) {
     django.catalog[key] = newcatalog[key];
@@ -71,31 +75,43 @@
     /* formatting library */
 
     django.formats = {
-    "DATETIME_FORMAT": "j. F Y H:i", 
+    "DATETIME_FORMAT": "N j, Y, P", 
     "DATETIME_INPUT_FORMATS": [
-      "%d.%m.%Y %H:%M:%S", 
-      "%d.%m.%Y %H:%M:%S.%f", 
-      "%d.%m.%Y %H:%M", 
-      "%d.%m.%Y", 
       "%Y-%m-%d %H:%M:%S", 
       "%Y-%m-%d %H:%M:%S.%f", 
       "%Y-%m-%d %H:%M", 
-      "%Y-%m-%d"
+      "%Y-%m-%d", 
+      "%m/%d/%Y %H:%M:%S", 
+      "%m/%d/%Y %H:%M:%S.%f", 
+      "%m/%d/%Y %H:%M", 
+      "%m/%d/%Y", 
+      "%m/%d/%y %H:%M:%S", 
+      "%m/%d/%y %H:%M:%S.%f", 
+      "%m/%d/%y %H:%M", 
+      "%m/%d/%y"
     ], 
-    "DATE_FORMAT": "j. F Y", 
+    "DATE_FORMAT": "N j, Y", 
     "DATE_INPUT_FORMATS": [
-      "%d.%m.%Y", 
-      "%d.%m.%y", 
-      "%Y-%m-%d"
+      "%Y-%m-%d", 
+      "%m/%d/%Y", 
+      "%m/%d/%y", 
+      "%b %d %Y", 
+      "%b %d, %Y", 
+      "%d %b %Y", 
+      "%d %b, %Y", 
+      "%B %d %Y", 
+      "%B %d, %Y", 
+      "%d %B %Y", 
+      "%d %B, %Y"
     ], 
-    "DECIMAL_SEPARATOR": ",", 
-    "FIRST_DAY_OF_WEEK": "1", 
-    "MONTH_DAY_FORMAT": "j. F", 
-    "NUMBER_GROUPING": "3", 
-    "SHORT_DATETIME_FORMAT": "d.m.Y H:i", 
-    "SHORT_DATE_FORMAT": "d.m.Y", 
-    "THOUSAND_SEPARATOR": ".", 
-    "TIME_FORMAT": "H:i", 
+    "DECIMAL_SEPARATOR": ".", 
+    "FIRST_DAY_OF_WEEK": "0", 
+    "MONTH_DAY_FORMAT": "F j", 
+    "NUMBER_GROUPING": "0", 
+    "SHORT_DATETIME_FORMAT": "m/d/Y P", 
+    "SHORT_DATE_FORMAT": "m/d/Y", 
+    "THOUSAND_SEPARATOR": ",", 
+    "TIME_FORMAT": "P", 
     "TIME_INPUT_FORMATS": [
       "%H:%M:%S", 
       "%H:%M:%S.%f", 
@@ -128,3 +144,10 @@
 
 }(this));
 
+
+                  }
+                };
+                ScormXBlockI18N.init();
+                global.ScormXBlockI18N = ScormXBlockI18N;
+            }(this));
+        

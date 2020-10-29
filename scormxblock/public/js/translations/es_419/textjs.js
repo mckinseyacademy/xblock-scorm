@@ -1,4 +1,8 @@
 
+            (function(global){
+                var ScormXBlockI18N = {
+                  init: function() {
+                    
 
 (function(globals) {
 
@@ -13,9 +17,9 @@
   django.catalog = django.catalog || {};
   
   var newcatalog = {
-    "Check for Completion": "\u68c0\u67e5\u662f\u5426\u586b\u5199\u5b8c\u6574", 
-    "Complete all content to continue.": "\u5b8c\u6574\u586b\u5199\u5185\u5bb9\u624d\u80fd\u7ee7\u7eed\u3002", 
-    "Content is complete, please continue.": "\u5185\u5bb9\u586b\u5199\u5b8c\u6574\uff0c\u8bf7\u7ee7\u7eed\u3002"
+    "Check for Completion": "Verifique que est\u00e9 completo.", 
+    "Complete all content to continue.": "Complete todo el contenido para continuar.", 
+    "Content is complete, please continue.": "El contenido est\u00e1 completo. Puede continuar."
   };
   for (var key in newcatalog) {
     django.catalog[key] = newcatalog[key];
@@ -71,49 +75,39 @@
     /* formatting library */
 
     django.formats = {
-    "DATETIME_FORMAT": "N j, Y, P", 
+    "DATETIME_FORMAT": "j \\d\\e F \\d\\e Y \\a \\l\\a\\s H:i", 
     "DATETIME_INPUT_FORMATS": [
+      "%d/%m/%Y %H:%M:%S", 
+      "%d/%m/%Y %H:%M:%S.%f", 
+      "%d/%m/%Y %H:%M", 
+      "%d/%m/%y %H:%M:%S", 
+      "%d/%m/%y %H:%M:%S.%f", 
+      "%d/%m/%y %H:%M", 
       "%Y-%m-%d %H:%M:%S", 
       "%Y-%m-%d %H:%M:%S.%f", 
       "%Y-%m-%d %H:%M", 
-      "%Y-%m-%d", 
-      "%m/%d/%Y %H:%M:%S", 
-      "%m/%d/%Y %H:%M:%S.%f", 
-      "%m/%d/%Y %H:%M", 
-      "%m/%d/%Y", 
-      "%m/%d/%y %H:%M:%S", 
-      "%m/%d/%y %H:%M:%S.%f", 
-      "%m/%d/%y %H:%M", 
-      "%m/%d/%y"
+      "%Y-%m-%d"
     ], 
-    "DATE_FORMAT": "N j, Y", 
+    "DATE_FORMAT": "j \\d\\e F \\d\\e Y", 
     "DATE_INPUT_FORMATS": [
-      "%Y-%m-%d", 
-      "%m/%d/%Y", 
-      "%m/%d/%y", 
-      "%b %d %Y", 
-      "%b %d, %Y", 
-      "%d %b %Y", 
-      "%d %b, %Y", 
-      "%B %d %Y", 
-      "%B %d, %Y", 
-      "%d %B %Y", 
-      "%d %B, %Y"
+      "%d/%m/%Y", 
+      "%d/%m/%y", 
+      "%Y-%m-%d"
     ], 
-    "DECIMAL_SEPARATOR": ".", 
-    "FIRST_DAY_OF_WEEK": "0", 
-    "MONTH_DAY_FORMAT": "F j", 
-    "NUMBER_GROUPING": "0", 
-    "SHORT_DATETIME_FORMAT": "m/d/Y P", 
-    "SHORT_DATE_FORMAT": "m/d/Y", 
-    "THOUSAND_SEPARATOR": ",", 
-    "TIME_FORMAT": "P", 
+    "DECIMAL_SEPARATOR": ",", 
+    "FIRST_DAY_OF_WEEK": "1", 
+    "MONTH_DAY_FORMAT": "j \\d\\e F", 
+    "NUMBER_GROUPING": "3", 
+    "SHORT_DATETIME_FORMAT": "d/m/Y H:i", 
+    "SHORT_DATE_FORMAT": "d/m/Y", 
+    "THOUSAND_SEPARATOR": ".", 
+    "TIME_FORMAT": "H:i", 
     "TIME_INPUT_FORMATS": [
       "%H:%M:%S", 
       "%H:%M:%S.%f", 
       "%H:%M"
     ], 
-    "YEAR_MONTH_FORMAT": "F Y"
+    "YEAR_MONTH_FORMAT": "F \\d\\e Y"
   };
 
     django.get_format = function(format_type) {
@@ -140,3 +134,10 @@
 
 }(this));
 
+
+                  }
+                };
+                ScormXBlockI18N.init();
+                global.ScormXBlockI18N = ScormXBlockI18N;
+            }(this));
+        

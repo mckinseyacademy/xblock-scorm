@@ -1,4 +1,8 @@
 
+            (function(global){
+                var ScormXBlockI18N = {
+                  init: function() {
+                    
 
 (function(globals) {
 
@@ -13,9 +17,9 @@
   django.catalog = django.catalog || {};
   
   var newcatalog = {
-    "Check for Completion": "Verifique que est\u00e9 completo.", 
-    "Complete all content to continue.": "Complete todo el contenido para continuar.", 
-    "Content is complete, please continue.": "El contenido est\u00e1 completo. Puede continuar."
+    "Check for Completion": "Auf Vollst\u00e4ndigkeit pr\u00fcfen", 
+    "Complete all content to continue.": "Zum Fortfahren Inhalt vervollst\u00e4ndigen.", 
+    "Content is complete, please continue.": "Inhalt ist vollst\u00e4ndig, bitte fahren Sie fort."
   };
   for (var key in newcatalog) {
     django.catalog[key] = newcatalog[key];
@@ -71,31 +75,29 @@
     /* formatting library */
 
     django.formats = {
-    "DATETIME_FORMAT": "j \\d\\e F \\d\\e Y \\a \\l\\a\\s H:i", 
+    "DATETIME_FORMAT": "j. F Y H:i", 
     "DATETIME_INPUT_FORMATS": [
-      "%d/%m/%Y %H:%M:%S", 
-      "%d/%m/%Y %H:%M:%S.%f", 
-      "%d/%m/%Y %H:%M", 
-      "%d/%m/%y %H:%M:%S", 
-      "%d/%m/%y %H:%M:%S.%f", 
-      "%d/%m/%y %H:%M", 
+      "%d.%m.%Y %H:%M:%S", 
+      "%d.%m.%Y %H:%M:%S.%f", 
+      "%d.%m.%Y %H:%M", 
+      "%d.%m.%Y", 
       "%Y-%m-%d %H:%M:%S", 
       "%Y-%m-%d %H:%M:%S.%f", 
       "%Y-%m-%d %H:%M", 
       "%Y-%m-%d"
     ], 
-    "DATE_FORMAT": "j \\d\\e F \\d\\e Y", 
+    "DATE_FORMAT": "j. F Y", 
     "DATE_INPUT_FORMATS": [
-      "%d/%m/%Y", 
-      "%d/%m/%y", 
+      "%d.%m.%Y", 
+      "%d.%m.%y", 
       "%Y-%m-%d"
     ], 
     "DECIMAL_SEPARATOR": ",", 
     "FIRST_DAY_OF_WEEK": "1", 
-    "MONTH_DAY_FORMAT": "j \\d\\e F", 
+    "MONTH_DAY_FORMAT": "j. F", 
     "NUMBER_GROUPING": "3", 
-    "SHORT_DATETIME_FORMAT": "d/m/Y H:i", 
-    "SHORT_DATE_FORMAT": "d/m/Y", 
+    "SHORT_DATETIME_FORMAT": "d.m.Y H:i", 
+    "SHORT_DATE_FORMAT": "d.m.Y", 
     "THOUSAND_SEPARATOR": ".", 
     "TIME_FORMAT": "H:i", 
     "TIME_INPUT_FORMATS": [
@@ -103,7 +105,7 @@
       "%H:%M:%S.%f", 
       "%H:%M"
     ], 
-    "YEAR_MONTH_FORMAT": "F \\d\\e Y"
+    "YEAR_MONTH_FORMAT": "F Y"
   };
 
     django.get_format = function(format_type) {
@@ -130,3 +132,10 @@
 
 }(this));
 
+
+                  }
+                };
+                ScormXBlockI18N.init();
+                global.ScormXBlockI18N = ScormXBlockI18N;
+            }(this));
+        
