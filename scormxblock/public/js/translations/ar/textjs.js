@@ -16,6 +16,15 @@
 
   django.catalog = django.catalog || {};
   
+  var newcatalog = {
+    "Check for Completion": "\u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u0644\u0627\u0643\u062a\u0645\u0627\u0644", 
+    "Complete all content to continue.": "\u0623\u0643\u0645\u0644 \u0643\u0644 \u0627\u0644\u0645\u062d\u062a\u0648\u0649 \u0644\u0644\u0645\u062a\u0627\u0628\u0639\u0629.", 
+    "Content is complete, please continue.": "\u0627\u0644\u0645\u062d\u062a\u0648\u0649 \u0645\u0643\u062a\u0645\u0644\u060c \u0627\u0644\u0631\u062c\u0627\u0621 \u0627\u0644\u0645\u062a\u0627\u0628\u0639\u0629."
+  };
+  for (var key in newcatalog) {
+    django.catalog[key] = newcatalog[key];
+  }
+  
 
   if (!django.jsi18n_initialized) {
     django.gettext = function(msgid) {
@@ -81,20 +90,28 @@
       "%m/%d/%y %H:%M", 
       "%m/%d/%y"
     ], 
-    "DATE_FORMAT": "N j, Y", 
+    "DATE_FORMAT": "j F\u060c Y", 
     "DATE_INPUT_FORMATS": [
       "%Y-%m-%d", 
       "%m/%d/%Y", 
-      "%m/%d/%y"
+      "%m/%d/%y", 
+      "%b %d %Y", 
+      "%b %d, %Y", 
+      "%d %b %Y", 
+      "%d %b, %Y", 
+      "%B %d %Y", 
+      "%B %d, %Y", 
+      "%d %B %Y", 
+      "%d %B, %Y"
     ], 
-    "DECIMAL_SEPARATOR": ".", 
+    "DECIMAL_SEPARATOR": ",", 
     "FIRST_DAY_OF_WEEK": "0", 
-    "MONTH_DAY_FORMAT": "F j", 
-    "NUMBER_GROUPING": "3", 
+    "MONTH_DAY_FORMAT": "j F", 
+    "NUMBER_GROUPING": "0", 
     "SHORT_DATETIME_FORMAT": "m/d/Y P", 
-    "SHORT_DATE_FORMAT": "m/d/Y", 
-    "THOUSAND_SEPARATOR": ",", 
-    "TIME_FORMAT": "P", 
+    "SHORT_DATE_FORMAT": "d\u200f/m\u200f/Y", 
+    "THOUSAND_SEPARATOR": ".", 
+    "TIME_FORMAT": "g:i A", 
     "TIME_INPUT_FORMATS": [
       "%H:%M:%S", 
       "%H:%M:%S.%f", 

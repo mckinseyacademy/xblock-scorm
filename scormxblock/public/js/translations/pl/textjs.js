@@ -16,6 +16,15 @@
 
   django.catalog = django.catalog || {};
   
+  var newcatalog = {
+    "Check for Completion": "Sprawd\u017a pod k\u0105tem wype\u0142nienia", 
+    "Complete all content to continue.": "Prosimy wype\u0142ni\u0107 ca\u0142\u0105 zawarto\u015b\u0107, aby kontynuowa\u0107", 
+    "Content is complete, please continue.": "Zawarto\u015b\u0107 jest wype\u0142niona, prosimy kontynuowa\u0107."
+  };
+  for (var key in newcatalog) {
+    django.catalog[key] = newcatalog[key];
+  }
+  
 
   if (!django.jsi18n_initialized) {
     django.gettext = function(msgid) {
@@ -66,35 +75,32 @@
     /* formatting library */
 
     django.formats = {
-    "DATETIME_FORMAT": "N j, Y, P", 
+    "DATETIME_FORMAT": "j E Y H:i", 
     "DATETIME_INPUT_FORMATS": [
+      "%d.%m.%Y %H:%M:%S", 
+      "%d.%m.%Y %H:%M:%S.%f", 
+      "%d.%m.%Y %H:%M", 
+      "%d.%m.%Y", 
       "%Y-%m-%d %H:%M:%S", 
       "%Y-%m-%d %H:%M:%S.%f", 
       "%Y-%m-%d %H:%M", 
-      "%Y-%m-%d", 
-      "%m/%d/%Y %H:%M:%S", 
-      "%m/%d/%Y %H:%M:%S.%f", 
-      "%m/%d/%Y %H:%M", 
-      "%m/%d/%Y", 
-      "%m/%d/%y %H:%M:%S", 
-      "%m/%d/%y %H:%M:%S.%f", 
-      "%m/%d/%y %H:%M", 
-      "%m/%d/%y"
+      "%Y-%m-%d"
     ], 
-    "DATE_FORMAT": "N j, Y", 
+    "DATE_FORMAT": "j E Y", 
     "DATE_INPUT_FORMATS": [
-      "%Y-%m-%d", 
-      "%m/%d/%Y", 
-      "%m/%d/%y"
+      "%d.%m.%Y", 
+      "%d.%m.%y", 
+      "%y-%m-%d", 
+      "%Y-%m-%d"
     ], 
-    "DECIMAL_SEPARATOR": ".", 
-    "FIRST_DAY_OF_WEEK": "0", 
-    "MONTH_DAY_FORMAT": "F j", 
+    "DECIMAL_SEPARATOR": ",", 
+    "FIRST_DAY_OF_WEEK": "1", 
+    "MONTH_DAY_FORMAT": "j F", 
     "NUMBER_GROUPING": "3", 
-    "SHORT_DATETIME_FORMAT": "m/d/Y P", 
-    "SHORT_DATE_FORMAT": "m/d/Y", 
-    "THOUSAND_SEPARATOR": ",", 
-    "TIME_FORMAT": "P", 
+    "SHORT_DATETIME_FORMAT": "d-m-Y  H:i", 
+    "SHORT_DATE_FORMAT": "d-m-Y", 
+    "THOUSAND_SEPARATOR": "\u00a0", 
+    "TIME_FORMAT": "H:i", 
     "TIME_INPUT_FORMATS": [
       "%H:%M:%S", 
       "%H:%M:%S.%f", 

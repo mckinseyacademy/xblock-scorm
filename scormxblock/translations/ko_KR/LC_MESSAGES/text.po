@@ -1,0 +1,158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-01 05:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: scormxblock.py:53
+msgid "Display Name"
+msgstr "표시 이름"
+
+#: scormxblock.py:54
+msgid "Display name for this module"
+msgstr "이 모듈의 표시 이름"
+
+#: scormxblock.py:59
+msgid "Description"
+msgstr "설명"
+
+#: scormxblock.py:60
+msgid ""
+"Brief description of the SCORM modules will be displayed above the player. "
+"Can contain HTML."
+msgstr "SCORM 모듈의 간략한 설명이 플레이어 위에 표시됩니다. HTML을 포함할 수 있습니다."
+
+#: scormxblock.py:65
+msgid "Upload scorm file (.zip)"
+msgstr "SCORM 파일(.zip) 업로드"
+
+#: scormxblock.py:66
+msgid "Upload a new SCORM package."
+msgstr "새 SCORM 패키지를 업로드하십시오."
+
+#: scormxblock.py:71
+msgid "SCORM player"
+msgstr "SCORM 플레이어"
+
+#: scormxblock.py:72
+msgid ""
+"SCORM player configured in Django settings, or index.html file contained in "
+"SCORM package"
+msgstr "Django 설정에서 구성된 SCORM 플레이어 또는 SCORM 패키지에 포함된 index.html 파일"
+
+#: scormxblock.py:98
+msgid ""
+"SCORM block's problem weight in the course, in points.  If not graded, set "
+"to 0"
+msgstr "강의 내 SCORM 블록의 문제 가중치(포인트). 등급이 지정되지 않은 경우 0으로 설정"
+
+#: scormxblock.py:102
+msgid "Enable completion upon viewing SCORM file"
+msgstr "SCORM 파일 확인 시 완료 활성화"
+
+#: scormxblock.py:107
+msgid "Locking"
+msgstr "차단"
+
+#: scormxblock.py:108
+msgid ""
+"Enable requirement to complete SCORM content before moving to next module"
+msgstr "다음 모듈로 이동하기 전에 SCORM 콘텐츠를 완료하도록 하기 위한 요구사항 활성화"
+
+#: scormxblock.py:113
+msgid "Display Type"
+msgstr "표시 유형"
+
+#: scormxblock.py:116
+msgid ""
+"Open in a new popup window, or an iframe.  This setting may be overridden by "
+"player-specific configuration."
+msgstr "새 팝업 창 또는 iframe에서 엽니다. 이 설정은 플레이어별 구성을 통해 재정의될 수 있습니다."
+
+#: scormxblock.py:120
+msgid "Popup Launch Type"
+msgstr "팝업 실행 유형"
+
+#: scormxblock.py:123
+msgid "Open in a new popup through button or automatically."
+msgstr "버튼을 통해 또는 자동으로 새 팝업에서 엽니다."
+
+#: scormxblock.py:127
+msgid "Launch Button Text"
+msgstr "실행 버튼 텍스트"
+
+#: scormxblock.py:128
+msgid "Display text for Launch Button"
+msgstr "실행 버튼의 표시 텍스트"
+
+#: scormxblock.py:133
+msgid "Display Width (px)"
+msgstr "표시 너비(px)"
+
+#: scormxblock.py:134
+msgid "Width of iframe or popup window"
+msgstr "iframe 또는 팝업 창의 너비"
+
+#: scormxblock.py:139
+msgid "Display Height (px)"
+msgstr "표시 높이(px)"
+
+#: scormxblock.py:140
+msgid "Height of iframe or popup window"
+msgstr "iframe 또는 팝업 창의 높이"
+
+#: scormxblock.py:145
+msgid "SCORM Package text encoding"
+msgstr "SCORM 패키지 텍스트 인코딩"
+
+#: scormxblock.py:147
+msgid ""
+"Character set used in SCORM package.  Defaults to cp850 (or IBM850), for "
+"Latin-1: Western European languages)"
+msgstr "SCORM 패키지에서 사용되는 문자 세트. 기본값은 cp850(또는 IBM850), Latin-1의 경우 서유럽 언어입니다."
+
+#: scormxblock.py:152
+msgid "Player Configuration"
+msgstr "플레이어 구성"
+
+#: scormxblock.py:154
+msgid ""
+"JSON object string with overrides to be passed to selected SCORM player.  "
+"These will be exposed as data attributes on the host iframe and sent in a "
+"window.postMessage to the iframe's content window. Attributes can be any.  "
+"'Internal player' will always check this field for an 'initial_html' "
+"attribute to override index.html as the initial page."
+msgstr "선택한 SCORM 플레이어에 전달할 재정의가 있는 JSON 객체 문자열입니다. 이들은 호스트 iframe에서 데이터 속성으로 노출되고 window.postMessage를 통해 iframe의 콘텐츠 창으로 전송됩니다. 속성은 어느 것이든 될 수 있습니다. '내부 플레이어'는 항상 이 필드에서 'initial_html' 속성을 확인하여 index.html을 초기 페이지로 재정의합니다."
+
+#: scormxblock.py:158
+msgid "Scorm File Name"
+msgstr "SCORM 파일 이름"
+
+#: scormxblock.py:159
+msgid "Scorm Package Uploaded File Name"
+msgstr "SCORM 패키지 업로드 파일 이름"
+
+#: scormxblock.py:541
+msgid "Question"
+msgstr "질문"
+
+#: scormxblock.py:542
+msgid "Answer"
+msgstr "답변"
+
+#: scormxblock.py:543
+msgid "Submissions count"
+msgstr "제출 답변 수"
