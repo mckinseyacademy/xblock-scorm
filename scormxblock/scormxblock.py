@@ -340,7 +340,7 @@ class ScormXBlock(XBlock):
 
         logger.info('Upload percentage is: {}'.format(upload_percent))
 
-        return Response(json_body=json.dumps({"progress": upload_percent}))
+        return Response(json.dumps({"progress": upload_percent}))
 
     @XBlock.handler
     def file_upload_handler(self, request, suffix=''):
@@ -358,7 +358,7 @@ class ScormXBlock(XBlock):
         except Exception as e:
             logger.error('Scorm package upload error: {}'.format(e.message))
             ScormPackageUploader.clear_percentage_cache(self.location.block_id)
-            return Response(json_body=json.dumps({'status': 'error', 'message': e.message}))
+            return Response(json.dumps({'status': 'error', 'message': e.message}))
 
         if state == UPLOAD_STATE.PROGRESS:
             response = {"files": [{
@@ -369,7 +369,7 @@ class ScormXBlock(XBlock):
             self.scorm_file = data
             response = {'status': 'OK'}
 
-        return Response(json_body=json.dumps(response))
+        return Response(json.dumps(response))
 
     @XBlock.handler
     def studio_submit(self, request, suffix=''):
