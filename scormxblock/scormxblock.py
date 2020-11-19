@@ -394,11 +394,11 @@ class ScormXBlock(XBlock):
                 json.loads(request.params['player_configuration'])  # just validation
                 self.player_configuration = request.params['player_configuration']
             except ValueError as e:
-                return Response(json_body=json.dumps({'result': 'failure',
+                return Response(json.dumps({'result': 'failure',
                                             'error': 'Invalid JSON in Player Configuration'.format(e)}),
-                                content_type='application/json')
+                                content_type='application/json', charset='UTF-8')
 
-        return Response(json_body=json.dumps({'result': 'success'}), content_type='application/json')
+        return Response(json.dumps({'result': 'success'}), content_type='application/json', charset='UTF-8')
 
     # if player sends SCORM API JSON directly
     @XBlock.json_handler
@@ -465,7 +465,7 @@ class ScormXBlock(XBlock):
         """
         # TODO: handle errors
         # TODO: this is specific to SSLA player at this point.  evaluate for broader use case
-        response = Response(json_body=self.raw_scorm_status, content_type='application/json', charset='UTF-8')
+        response = Response(self.raw_scorm_status, content_type='application/json', charset='UTF-8')
         if self.auto_completion:
             # Mark 100% progress upon launching the scorm content if auto_completion is true
             self._publish_progress(constants.MAX_PROGRESS_VALUE)
@@ -496,15 +496,12 @@ class ScormXBlock(XBlock):
         self.save()
 
         # TODO: handle errors
-        return Response(json_body=json.dumps(self.raw_scorm_status), content_type='application/json', charset='UTF-8')
+        return Response(json.dumps(self.raw_scorm_status), content_type='application/json', charset='UTF-8')
 
     @XBlock.handler
     def get_scorm_completion(self, request, suffix=''):
         completion = {'completion': self.scorm_progress or 0}
-        return Response(
-            json_body=json.dumps(completion),
-            content_type='application/json'
-        )
+        return Response(json.dumps(completion), content_type='application/json', charset='UTF-8')
 
     @XBlock.handler
     def proxy_content(self, request, suffix=''):

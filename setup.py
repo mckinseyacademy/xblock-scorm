@@ -25,7 +25,7 @@ def package_data(pkg, roots):
 
 setup(
     name='scormxblock-xblock',
-    version='3.2',
+    version='3.2.1',
     description='XBlock to integrate SCORM content packages',
     packages=[
         'scormxblock',
