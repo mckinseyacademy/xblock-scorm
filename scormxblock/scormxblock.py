@@ -519,7 +519,7 @@ class ScormXBlock(XBlock):
         else:
             return Response('Did not exist in storage: {}'.format(path_to_file).encode('utf-8'), status=404,
                             content_type='text/html', charset='UTF-8')
-        return Response(contents, content_type=content_type)
+        return Response(contents, content_type=str(content_type))
 
     def generate_report_data(self, user_state_iterator, limit_responses=None):
         """
