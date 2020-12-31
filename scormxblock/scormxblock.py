@@ -36,8 +36,7 @@ def _(text):
 
 logger = logging.getLogger(__name__)
 
-# importing directly from settings.XBLOCK_SETTINGS doesn't work here... doesn't have vals from ENV TOKENS yet
-scorm_settings = settings.ENV_TOKENS['XBLOCK_SETTINGS']['ScormXBlock'] if hasattr(settings, 'ENV_TOKENS') else {}
+scorm_settings = settings.XBLOCK_SETTINGS.get('ScormXBlock', {}) if hasattr(settings, "XBLOCK_SETTINGS") else {}
 DEFINED_PLAYERS = scorm_settings.get("SCORM_PLAYER_BACKENDS", {})
 SCORM_STORAGE = scorm_settings.get("SCORM_PKG_STORAGE_DIR", "scorms")
 SCORM_DISPLAY_STAFF_DEBUG_INFO = scorm_settings.get("SCORM_DISPLAY_STAFF_DEBUG_INFO", False)
@@ -356,9 +355,9 @@ class ScormXBlock(XBlock):
         try:
             state, data = scorm_uploader.upload()
         except Exception as e:
-            logger.error('Scorm package upload error: {}'.format(e.message))
+            logger.error('Scorm package upload error: {}'.format(e))
             ScormPackageUploader.clear_percentage_cache(self.location.block_id)
-            return Response(json.dumps({'status': 'error', 'message': e.message}))
+            return Response(json.dumps({'status': 'error', 'message': str(e)}))
 
         if state == UPLOAD_STATE.PROGRESS:
             response = {"files": [{
@@ -506,20 +505,21 @@ class ScormXBlock(XBlock):
     @XBlock.handler
     def proxy_content(self, request, suffix=''):
         storage = default_storage
-        contents = ''
+        contents = b''
         content_type = 'application/octet-stream'
         path_to_file = os.path.join(SCORM_STORAGE, self.location.block_id, suffix)
 
         if storage.exists(path_to_file):
-            f = storage.open(path_to_file, 'rb')
-            contents = f.read()
+            with storage.open(path_to_file, 'rb') as f:
+                contents = f.read()
+
             ext = os.path.splitext(path_to_file)[1]
             if ext in mimetypes.types_map:
                 content_type = mimetypes.types_map[ext]
         else:
-            return Response('Did not exist in storage: ' + path_to_file, status=404,
+            return Response('Did not exist in storage: {}'.format(path_to_file).encode('utf-8'), status=404,
                             content_type='text/html', charset='UTF-8')
-        return Response(contents, content_type=content_type)
+        return Response(contents, content_type=str(content_type))
 
     def generate_report_data(self, user_state_iterator, limit_responses=None):
         """
