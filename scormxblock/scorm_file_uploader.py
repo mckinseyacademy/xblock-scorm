@@ -117,7 +117,7 @@ class ScormPackageUploader:
                     logger.info('File `{}` stored.'.format(file_relative_path))
                     uploaded_size += file_to_store['size']
                     self._set_upload_progress(uploaded_size, total_files_size)
-                except encoding.DjangoUnicodeDecodeError as e:
+                except (encoding.DjangoUnicodeDecodeError, BrokenPipeError) as e:
                     logger.warn('SCORM XBlock Couldn\'t store file {} to storage. {}'.format(file_to_store, e))
 
         self._post_upload_cleanup(tempdir)
