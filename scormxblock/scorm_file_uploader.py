@@ -142,7 +142,7 @@ class ScormPackageUploader:
             except OSError:
                 # TODO: for now we are going to assume this means it's stored on S3 if not local
                 try:
-                    for key in storage.bucket.list(prefix=self.scorm_storage_location):
+                    for key in storage.bucket.objects.filter(prefix=self.scorm_storage_location):
                         key.delete()
                 except AttributeError:  # pylint: disable=try-except-raise
                     raise
