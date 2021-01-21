@@ -352,12 +352,12 @@ class ScormXBlock(XBlock):
             scorm_storage_location=SCORM_STORAGE
         )
 
-        try:
-            state, data = scorm_uploader.upload()
-        except Exception as e:
-            logger.error('Scorm package upload error: {}'.format(e))
-            ScormPackageUploader.mark_as_failed(self.location.block_id)
-            return Response(json.dumps({'status': 'error', 'message': str(e)}))
+        #try:
+        state, data = scorm_uploader.upload()
+        # except Exception as e:
+        #     logger.error('Scorm package upload error: {}'.format(e))
+        #     ScormPackageUploader.mark_as_failed(self.location.block_id)
+        #     return Response(json.dumps({'status': 'error', 'message': str(e)}))
 
         if state == UPLOAD_STATE.PROGRESS:
             response = {"files": [{
