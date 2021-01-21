@@ -356,7 +356,7 @@ class ScormXBlock(XBlock):
             state, data = scorm_uploader.upload()
         except Exception as e:
             logger.error('Scorm package upload error: {}'.format(e))
-            ScormPackageUploader.clear_percentage_cache(self.location.block_id)
+            ScormPackageUploader.mark_as_failed(self.location.block_id)
             return Response(json.dumps({'status': 'error', 'message': str(e)}))
 
         if state == UPLOAD_STATE.PROGRESS:

@@ -17,6 +17,17 @@ function ScormStudioXBlock(runtime, element) {
   
   function pollUploadStatus() {
     $.getJSON(pollingParams.url, function(data) {
+      if(data.progress == 'error'){
+        clearInterval(pollingParams.id);
+
+        $(element).find('.file-chosen').text('');
+        $(element).find('#scorm-file-select').show();
+        $(element).find('.status-container').hide();
+        $(element).find('.save-button').removeClass('disabled');
+
+        alert('Error while uploading scorm package. Please retry later.');
+        return;
+      }
       var percentVal = data.progress + '%';
       updateProgressUI('Unpack and Storing', percentVal);
 

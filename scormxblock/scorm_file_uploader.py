@@ -118,7 +118,7 @@ class ScormPackageUploader:
                     uploaded_size += file_to_store['size']
                     self._set_upload_progress(uploaded_size, total_files_size)
                 except (encoding.DjangoUnicodeDecodeError, BrokenPipeError) as e:
-                    logger.warn('SCORM XBlock Couldn\'t store file {} to storage. {}'.format(file_to_store, e))
+                    logger.warn('SCORM XBlock Couldn\'t store file {} to storage. {}'.format(file_temp_path, e))
 
         self._post_upload_cleanup(tempdir)
 
@@ -127,7 +127,7 @@ class ScormPackageUploader:
 
     def _get_storage(self):
         if settings.DEFAULT_FILE_STORAGE == 'storages.backends.s3boto.S3BotoStorage':
-            s3_boto_storage_class = get_storage_class()
+            s3_boto_storage_class = get_storage_class('storages.backends.s3boto3.S3Boto3Storage')
             # initializing S3 storage with private acl
             storage = s3_boto_storage_class(acl='private')
         else:
@@ -187,3 +187,8 @@ class ScormPackageUploader:
     def clear_percentage_cache(block_id):
         cache_key = ScormPackageUploader._get_progress_cache_key(block_id)
         cache.delete(cache_key)
+
+    @staticmethod
+    def mark_as_failed(block_id):
+        cache_key = ScormPackageUploader._get_progress_cache_key(block_id)
+        cache.set(cache_key, 'error', PROGRESS_CACHE_EXPIRY)
