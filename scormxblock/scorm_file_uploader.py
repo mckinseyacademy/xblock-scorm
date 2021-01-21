@@ -111,7 +111,7 @@ class ScormPackageUploader:
             with open(file_temp_path, FileAccessMode.READ_WRITE) as fh:
                 try:
                     logger.info(
-                        'Storing file `{}` of size `{}` on S3'.format(file_relative_path, file_to_store['size'])
+                        'Storing file `{}` of size `{}` on S3'.format(file_relative_path, getattr(fh, 'content_type', None))
                     )
                     storage.save('{}{}'.format(self.scorm_storage_location, file_relative_path), fh)
                     logger.info('File `{}` stored.'.format(file_relative_path))
