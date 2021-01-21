@@ -6,6 +6,7 @@ import re
 import shutil
 import tempfile
 import zipfile
+import mimetypes
 
 from django.conf import settings
 from django.core.cache import cache
@@ -111,7 +112,7 @@ class ScormPackageUploader:
             with open(file_temp_path, FileAccessMode.READ_WRITE) as fh:
                 try:
                     logger.info(
-                        'Storing file `{}` of size `{}` on S3'.format(file_relative_path, getattr(fh, 'content_type', None))
+                        'Storing file `{}` of size `{}` on S3'.format(file_relative_path, mimetypes.guess_type(file_temp_path))
                     )
                     storage.save('{}{}'.format(self.scorm_storage_location, file_relative_path), fh)
                     logger.info('File `{}` stored.'.format(file_relative_path))
