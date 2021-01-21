@@ -110,10 +110,12 @@ class ScormPackageUploader:
             file_relative_path = file_temp_path.replace(tempdir, '')
 
             with open(file_temp_path, FileAccessMode.READ_WRITE) as fh:
+                content_type, _ = mimetypes.guess_type(file_temp_path)
                 try:
                     logger.info(
-                        'Storing file `{}` of size `{}` on S3'.format(file_relative_path, mimetypes.guess_type(file_temp_path))
+                        'Storing file `{}` of size `{}` on S3'.format(file_relative_path, file_to_store['size'])
                     )
+                    setattr(fh, 'content_type', str(content_type))
                     storage.save('{}{}'.format(self.scorm_storage_location, file_relative_path), fh)
                     logger.info('File `{}` stored.'.format(file_relative_path))
                     uploaded_size += file_to_store['size']
