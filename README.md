@@ -78,5 +78,4 @@ If you want to add a new language:
   ```bash
   make compile_translations
   ```
-
-
+write
